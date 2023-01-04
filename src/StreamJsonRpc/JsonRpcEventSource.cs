@@ -206,10 +206,11 @@ internal sealed class JsonRpcEventSource : EventSource
     /// Signals the transmission of a successful response.
     /// </summary>
     /// <param name="requestId">The ID of the request being responded to.</param>
+    /// <param name="method">The name of the  method.</param>
     [Event(SendingResultEvent, Task = Tasks.InboundCall, Opcode = EventOpcode.Stop, Tags = Tags.Success, Level = EventLevel.Informational)]
-    public void SendingResult(long requestId)
+    public void SendingResult(long requestId, string method)
     {
-        this.WriteEvent(SendingResultEvent, requestId);
+        this.WriteEvent(SendingResultEvent, requestId, method);
     }
 
     /// <summary>
